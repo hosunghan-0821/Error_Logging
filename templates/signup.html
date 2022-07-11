@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error_Logging</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/CSS/signup.css">
+</head>
+<body>
+
+<!--메인 container-->
+<main style="display: flex; align-items: center; flex-direction: column; justify-content: center">
+    <!-- 상단 제목 container -->
+    <div class="container">
+        <div class="row" style=" margin:25px auto;">
+            <div class="fs-4 text-primary text-center">
+                🔥회원가입🔥
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row form-signin">
+            <form>
+                <div class="m-2">회원 아이디</div>
+                <div class="input-group mb-3">
+                    <input id="user_id" type="text" class="form-control" placeholder="회원 아이디(글자수 9~12)"
+                           aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <button class="btn btn-outline-secondary" type="button"
+                            id="user_id_duplicate_check">중복확인
+                    </button>
+                </div>
+                <div class="text-danger fs-6 m-2 " id="user_id_message">
+
+                </div>
+                <div class="m-2">회원 비밀번호</div>
+                <div class="input-group mb-3">
+                    <input id="user_pw" type="password" class="form-control"
+                           aria-label="Sizing example input"
+                           placeholder="회원 비밀번호 특수문자 포함 9자리 이상 입력해주세요"
+                           aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="text-danger fs-6 m-2 " id="user_pw_message">
+
+                </div>
+
+                <div class="m-2">회원 비밀번호 재입력</div>
+                <div class="input-group mb-3">
+                    <input id="user_pw_check" type="password" class="form-control" aria-label="Sizing example input"
+                           placeholder="회원 비밀번호를 다시 입력해주세요 "
+                           aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="text-danger fs-6 m-2 " id="user_pw_check_message">
+
+                </div>
+
+                <div class="m-2">회원 닉네임</div>
+                <div class="input-group mb-3">
+                    <input id="user_nickname" type="text" class="form-control" placeholder="닉네임(글자수 2~10)"
+                           aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <button class="btn btn-outline-secondary" type="button" id="user_nickname_duplicate_check">중복확인
+                    </button>
+                </div>
+                <div class="text-danger fs-6 m-2 " id="user_nickname_message">
+
+                </div>
+
+                <button onclick="user_signup()" class="mt-3 w-100 btn btn-lg btn-primary" type="button">회원가입</button>
+            </form>
+        </div>
+    </div>
+
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+<script>
+
+    // 중복체크 버튼 클릭 시 실행 되는 함수
+    $('#user_id_duplicate_check').click(function () {
+        user_id_check()
+    })
+
+    // 비밀번호 다 입력하고 focus out 할 경우 실행 되는 함수
+    $('#user_pw').focusout(function () {
+        user_pw_check()
+    })
+
+    // 비밀번호 다 입력하고 focus out 할 경우 실행 되는 함수
+    $('#user_pw_check').focusout(function () {
+        user_pw_again_check()
+    })
+
+    $('#user_nickname_duplicate_check').click(function () {
+        user_nickname_check()
+    })
+
+    //회원 아이디 유효성 검사 함수
+    //TO-DO Ajax 이용해서, 아이디 중복 check 아직 미구현
+    function user_id_check() {
+        let user_id = $('#user_id').val()
+
+        // 우선 중복 check ajax로 DB 연결해서 안겹치는거 확인한 후 , 그 뒤에 유효성 검사
+
+
+        $('#user_id_message').text("사용가능한 닉네임입니다.")
+        //정규식을 활용해서 특수문자 or 공백 거르는 IF문
+        if (user_id.search(/\W|\s/g) > -1) {
+            validation_false("user_id_message", "사용 불가능한 아이디 입니다.")
+            return false;
+        } else {
+            //사용자 특수문자 길이 확인하는 IF문
+            if (user_id.length >= 6 && user_id.length <= 12) {
+                validation_true("user_id_message", "사용 가능한 아이디 입니다.")
+                return true;
+            } else {
+                validation_false("user_id_message", "사용 불가능한 아이디 입니다.")
+                return false;
+            }
+        }
+    }
+
+    //회원 비밀번호 유효성 검사 함수
+    function user_pw_check() {
+        let user_pw = $('#user_pw').val()
+        // 사용자 길이 6~20  , 특문 or 숫자1개 반드시 포함
+        if (user_pw.search(/^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,20}$/) > -1) {
+            validation_true("user_pw_message", "사용 가능한 비밀번호입니다.")
+            return true
+        } else {
+            validation_false("user_pw_message", "최소 1개의 숫자 혹은 특수 문자를 포함해야 함 길이 (6~20) ")
+            return false
+        }
+    }
+
+    //회원 비밀번호 일치하는지 검사 함수
+    function user_pw_again_check() {
+        let user_pw_again = $('#user_pw_check').val()
+        let user_pw = $('#user_pw').val()
+        if (user_pw === user_pw_again) {
+            validation_true("user_pw_check_message", "비밀번호가 일치합니다.")
+            return true
+        } else {
+            validation_false("user_pw_check_message", "비밀번호가 다릅니다.")
+            return false
+        }
+    }
+
+    //닉네임 중복 및 유효성 검사 함수
+    //TO-DO Ajax 이용해서, 아이디 중복 check 아직 미구현
+    function user_nickname_check() {
+
+        // 우선 중복 check ajax로 DB 연결해서 닉네임 안겹치는거 확인한 후 , 그 뒤에 유효성 검사
+
+        let user_nickname = $('#user_nickname').val()
+        if (user_nickname.search(/\W|\s/g) > -1) {
+            validation_false("user_nickname_message", "사용 불가능한 닉네임 입니다.")
+            return false;
+        } else {
+            if (user_nickname.length >= 2 && user_nickname.length <= 10) {
+                validation_true("user_nickname_message", "사용 가능한 닉네임 입니다.")
+                return true;
+            } else {
+                validation_false("user_nickname_message", "사용 불가능한 닉네임 입니다.")
+                return false;
+            }
+        }
+    }
+
+
+    // 유효성 검사 후 각 div id에 작성될 message 작성
+    function validation_true(id, message) {
+        $('#' + id).removeClass('text-danger')
+        $('#' + id).addClass('text-primary')
+        $('#' + id).text(message)
+    }
+
+    function validation_false(id, message) {
+        $('#' + id).removeClass('text-primary')
+        $('#' + id).addClass('text-danger')
+        $('#' + id).text(message)
+
+    }
+
+
+    function user_signup() {
+        if (user_id_check() === false) {
+            alert("id를 확인하세요")
+            validation_false("user_id_message", "사용 불가능한 아이디 입니다.")
+            return ;
+        } else if (user_pw_check() === false) {
+            alert("pw를 확인하세요")
+            validation_false("user_pw_message", "최소 1개의 숫자 혹은 특수 문자를 포함해야 함 길이 (6~20) ")
+            return ;
+
+        } else if (user_pw_again_check() === false) {
+            alert("pw를 확인하세요")
+            validation_false("user_pw_check_message", "비밀번호가 다릅니다.")
+            return ;
+        } else if(user_nickname_check() ===false){
+            alert("닉네임을 확인하세요")
+            validation_false("user_nickname_message", "사용 불가능한 닉네임 입니다.")
+            return false;
+        }
+        // 다 통과했으면 서버로 전송
+        else{
+            alert ("서버 전송")
+        }
+
+    }
+</script>
+</body>
+</html>
