@@ -19,10 +19,11 @@ def home():
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         print(payload['user_nickname'])
-        return render_template('index.html')
+        user_info = {'user_nickname': payload['user_nickname']}
+        return render_template('index.html', user_info=user_info)
     except jwt.ExpiredSignatureError:
-        print("쿠키만료")
-        return render_template('index.html')
+        user_info = {'user_nickname': False}
+        return render_template('index.html', user_info=user_info)
     except jwt.exceptions.DecodeError:
-        print("decode 에러")
-        return render_template('index.html')
+        user_info = {'user_nickname': False}
+        return render_template('index.html', user_info=user_info)

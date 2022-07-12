@@ -36,7 +36,7 @@ def verify():
         payload = {
             'user_id': user_id,
             'user_nickname': result['user_nickname'],
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=20)
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=300)
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
         return jsonify({'result': 'success', 'token': token})
