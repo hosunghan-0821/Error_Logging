@@ -14,9 +14,6 @@ db = client.dbsparta
 
 write_page = Blueprint('write_page', __name__, template_folder='templates')
 
-
-APP_ROOT = os.path.dirname(os.path.abspath(__file__))
-
 @write_page.route('/log/write')
 def home():
     return render_template('write.html')
@@ -37,12 +34,6 @@ def error_logging_post():
     db.write.insert_one(doc)
 
     return jsonify({'msg': '작성완료!'})
-
-
-@write_page.route("/write", methods=["GET"])
-def error_logging_get():
-    all_detail = list(db.write.find({}, {'_id':False}))
-    return jsonify({'write': all_detail})
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

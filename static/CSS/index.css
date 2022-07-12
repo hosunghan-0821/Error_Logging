@@ -1,0 +1,50 @@
+html {
+    height: 100vh;
+}
+
+body {
+    height: 100vh;
+}
+
+* {
+    /*font-family: 'Nanum Pen Script', cursive;*/
+
+}
+
+main {
+    min-height: calc(100% - 200px);
+}
+
+.user_nav{
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #0d6efd;
+    text-decoration: none;
+}
+
+.mytitle {
+    height: 100px;
+    background-color: white;
+    background-position: center 30%;
+    background-size: cover;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-footer {
+    height: 150px;
+    weight: 100%;
+
+
+    background-color: whitesmoke;
+    background-position: center 30%;
+    background-size: cover;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
