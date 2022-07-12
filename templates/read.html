@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:justify-align="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="style.css"/>
+
+
+    <title>
+        1주차미니프로젝트_글보기
+    </title>
+
+
+</head>
+<body>
+</body>
+
+
+<script>
+</script>
+
+
+<style>
+
+    .heotal {
+        border: 2px solid rgba(0, 0, 0, 0.4);
+    }
+
+    h1 {
+        text-align: center;
+        font-weight: bold;
+        color: #0d62fd;
+
+    }
+
+    .h1-box {
+        padding: 20px;
+    }
+
+    .container {
+        boxsizing: border-box;
+        border: 2px solid darkblue;
+
+        max-width: 100%;
+        max-height: 100%;
+
+        flex-direction: column;
+
+    }
+
+    .list-container {
+        margin: auto 0 auto 30px;
+        justify-content: space-evenly;
+        display: flex;
+
+    }
+
+    .input-container {
+        boxsizing: border-box;
+        width: 70px;
+        height: 60px;
+
+    }
+
+    .name {
+        width: 700px;
+        text-align: center;
+
+    }
+
+    .button {
+        margin: 0px 25px 30px 0px;
+        width: 70px;
+
+    }
+
+    .img {
+        justify-content: space-evenly;
+
+    }
+
+    /*칼럼= 수직, 로우=수평*/
+</style>
+<div class="heotal">
+    <div class="input-container">
+        <button class="button" id="add-button">상세보기</button>
+    </div>
+    <div class="container">
+        <div class="h1-box">
+            <h1>에러사항</h1>
+        </div>
+        <div style="display: flex; align-items: center;" class="list-container">
+            <div class="name">
+            </div>
+            <div class="img">
+                <!--                            id="inline"-->
+                <img src="">
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="h1-box">
+            <h1>해결방안</h1>
+        </div>
+        <div style="display: flex; align-items: center;" class="list-container">
+            <div class="name">
+            </div>
+            <div class="img">
+                <!--                            id="inline"-->
+                <img src="">
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!--------------------------------------------------------------------------------------------------------------------------------->
+
+<script src="app.js"></script>
+</html>
