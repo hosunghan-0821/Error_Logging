@@ -8,221 +8,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/CSS/write.css">
 
 
     <title>에러 작성</title>
 
     <style>
-        * {
-            font-family: 'Gowun Batang', serif;
-            color: black;
 
-        }
-
-        body {
-            background-position: center;
-            background-size: cover;
-            height: 100%;
-        }
-
-        h1 {
-            font-weight: bold;
-            font-size: 2em;
-            text-align: center;
-            color: #0d6efd;
-
-        }
-
-        .detail-container {
-            max-width: 700px;
-            height: 100%;
-            margin: 60px auto 0px auto;
-            padding-bottom: 60px;
-        }
-
-        .detail-info {
-            padding: 20px;
-            height: 100%;
-            border: 3px solid rgba(0, 0, 0, 0.4);
-            border-radius: 10px;
-            font-size: 20px;
-        }
-
-        .detail-container > table {
-            margin: 40px 0;
-            font-size: 18px;
-        }
-
-        .input-group {
-            width: 50%;
-        }
-
-        .input-group-second {
-            width: 90%;
-        }
-
-        .input-group-text {
-            background-color: transparent;
-            color: #0d6efd;
-        }
-
-        .input-group-detail-span {
-            padding-top: 20px;
-            color: #0d6efd;
-        }
-
-        input:focus {
-            background-color: transparent;
-            color: black;
-            outline: none;
-            border-right: none;
-            border-top: none;
-            border-left: none;
-            border-bottom: 2px solid rgba(13, 110, 253, 0.3);
-        }
-
-        input {
-            border-top: none;
-            border-left: none;
-            border-right: none;
-            border-bottom: 2px solid rgba(0, 0, 0, 0.3);
-            font-weight: bold;
-            padding: 10px;
-        }
-
-        .form-control-detail {
-            resize: none;
-            width: 95%;
-            height: 120px;
-            border-top: none;
-            border-left: none;
-            border-right: none;
-            border-bottom: 2px solid rgba(0, 0, 0, 0.3);
-            font-weight: bold;
-            padding: 10px;
-        }
-
-        .input-detail-container {
-            margin-top: 60px;
-            height: 100%;
-        }
-
-        textarea:focus {
-            background-color: transparent;
-            color: black;
-            outline: none;
-            border-right: none;
-            border-top: none;
-            border-left: none;
-            border-bottom: 2px solid rgba(13, 110, 253, 0.3);
-        }
-
-        .input-group > input {
-            width: 100%;
-        }
-
-        .btn-3-container {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 100px;
-        }
-
-        .btn-3-box {
-            position: relative;
-            width: 130px;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-        }
-
-        .btn-3 {
-            width: 130px;
-            line-height: 42px;
-            padding: 0;
-            font-size: 20px;
-            border-radius: 10px;
-            border: none;
-            background: rgba(13, 110, 253, 0.8);
-
-        }
-
-        .btn-3 span {
-            position: relative;
-            display: block;
-            width: 100%;
-            color: white;
-        }
-
-        .btn-3:before,
-        .btn-3:after {
-            position: absolute;
-            content: "";
-            right: 0;
-            top: 0;
-            background: #0d6efd;
-            transition: all 0.5s ease;
-        }
-
-        .btn-3:before {
-            height: 0%;
-            width: 2px;
-        }
-
-        .btn-3:after {
-            width: 0%;
-            height: 2px;
-        }
-
-        .btn-3:hover {
-            background: transparent;
-            box-shadow: none;
-        }
-
-        .btn-3:hover:before {
-            height: 100%;
-        }
-
-        .btn-3:hover:after {
-            width: 100%;
-        }
-
-        .btn-3 span:hover {
-            color: #0d6efd;
-        }
-
-        .btn-3 span:before,
-        .btn-3 span:after {
-            position: absolute;
-            content: "";
-            left: 0;
-            bottom: 0;
-            background: #0d6efd;
-            transition: all 0.3s ease;
-        }
-
-        .btn-3 span:before {
-            width: 2px;
-            height: 0%;
-        }
-
-        .btn-3 span:after {
-            width: 0%;
-            height: 2px;
-        }
-
-        .btn-3 span:hover:before {
-            height: 100%;
-        }
-
-        .btn-3 span:hover:after {
-            width: 100%;
-        }
-
-        option {
-            color: black;
-        }
     </style>
 
     <script>
@@ -235,8 +27,7 @@
                 url: '/write',
                 data: {title_give: title, detail_give: detail, solution_give: solution},
                 success: function () {
-                    $('#submit-btn').submit()
-                    window.location.reload()
+                    window.location.replace('/')
                 }
             });
         }
@@ -249,35 +40,35 @@
 
         <span class="input-group-text">제목</span>
         <div class="input-group mb-3">
-            <input id="title" type="text" class="form-control" placeholder="제목을 입력해주세요">
+            <input id="title" type="text" class="form-control" placeholder="제목을 입력해주세요" onfocus="this.placeholder = ''" onblur="this.placeholder = '제목을 입력해주세요'">
         </div>
 
         <div class="input-detail-container">
             <span class="input-group-text input-group-detail-span">상세설명</span>
             <div class="input-group input-group-second mb-3">
-                <textarea id="detail" type="text" class="form-control-detail" placeholder="에러를 상세하게 입력해주세요"></textarea>
+                <textarea id="detail" type="text" class="form-control-detail" placeholder="상세하게 입력해주세요" onfocus="this.placeholder = ''" onblur="this.placeholder = '상세하게 입력해주세요'"></textarea>
             </div>
         </div>
 
         <form action="/" method="post" id="upload-form" enctype="multipart/form-data">
             <label>이미지 첨부</label>
-            <input type="file" name="file" class="form-control" placeholder="">
+            <input type="file" name="file" class="form-control-image" placeholder="">
         </form>
 
         <div class="detail-container" style="padding-top: 50px">
             <h1>😊해결방안</h1>
-            <div >
+            <div>
                 <div class="input-detail-container" style="padding-top: 70px">
                     <span class="input-group-text input-group-detail-span">상세설명</span>
                     <div class="input-group input-group-second mb-3">
                         <textarea id="solution" type="text" class="form-control-detail"
-                                  placeholder="에러를 상세하게 입력해주세요"></textarea>
+                                  placeholder="상세하게 입력해주세요" onfocus="this.placeholder = ''" onblur="this.placeholder = '상세하게 입력해주세요'"></textarea>
                     </div>
                 </div>
 
-                <form action="/" method="post" id="upload-form" enctype="multipart/form-data">
+                <form action="/" method="post" id="upload-form2" enctype="multipart/form-data">
                     <label>이미지 첨부</label>
-                    <input type="file" name="file" class="form-control" placeholder="">
+                    <input type="file" name="file" class="form-control-image" placeholder="">
                 </form>
 
             </div>
@@ -286,7 +77,7 @@
 
         <div class="btn-3-container">
             <div class="btn-3-box">
-                <button onclick="save_detail()" id="submit-btn" form="upload-form" class="btn btn-warning btn-3"><span>작성하기</span>
+                <button onclick="save_detail()" id="submit-btn" class="btn btn-warning btn-3"><span>작성하기</span>
                 </button>
             </div>
         </div>
