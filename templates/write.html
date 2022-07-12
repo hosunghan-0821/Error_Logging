@@ -27,7 +27,13 @@
                 url: '/write',
                 data: {title_give: title, detail_give: detail, solution_give: solution},
                 success: function () {
-                    window.location.replace('/')
+                    if (title, detail, solution == "") {
+                        alert("칸이 비어있습니다")
+                        window.location.reload()
+                    } else {
+                        window.location.replace('/')
+
+                    }
                 }
             });
         }
@@ -40,13 +46,15 @@
 
         <span class="input-group-text">제목</span>
         <div class="input-group mb-3">
-            <input id="title" type="text" class="form-control" placeholder="제목을 입력해주세요" onfocus="this.placeholder = ''" onblur="this.placeholder = '제목을 입력해주세요'">
+            <input id="title" type="text" class="form-control" placeholder="제목을 입력해주세요" onfocus="this.placeholder = ''"
+                   onblur="this.placeholder = '제목을 입력해주세요'">
         </div>
 
         <div class="input-detail-container">
             <span class="input-group-text input-group-detail-span">상세설명</span>
             <div class="input-group input-group-second mb-3">
-                <textarea id="detail" type="text" class="form-control-detail" placeholder="상세하게 입력해주세요" onfocus="this.placeholder = ''" onblur="this.placeholder = '상세하게 입력해주세요'"></textarea>
+                <textarea id="detail" type="text" class="form-control-detail" placeholder="상세하게 입력해주세요"
+                          onfocus="this.placeholder = ''" onblur="this.placeholder = '상세하게 입력해주세요'"></textarea>
             </div>
         </div>
 
@@ -62,7 +70,8 @@
                     <span class="input-group-text input-group-detail-span">상세설명</span>
                     <div class="input-group input-group-second mb-3">
                         <textarea id="solution" type="text" class="form-control-detail"
-                                  placeholder="상세하게 입력해주세요" onfocus="this.placeholder = ''" onblur="this.placeholder = '상세하게 입력해주세요'"></textarea>
+                                  placeholder="상세하게 입력해주세요" onfocus="this.placeholder = ''"
+                                  onblur="this.placeholder = '상세하게 입력해주세요'"></textarea>
                     </div>
                 </div>
 

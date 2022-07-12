@@ -25,6 +25,7 @@ def error_logging_post():
     detail_write = request.form['detail_give']
     solution_write = request.form['solution_give']
 
+
     doc={
         'title':title,
         'detail':detail_write,
