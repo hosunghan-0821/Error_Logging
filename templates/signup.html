@@ -8,6 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
     <link rel="stylesheet" href="../static/CSS/signup.css">
 </head>
 <body>
@@ -28,7 +30,7 @@
             <form>
                 <div class="m-2">회원 아이디</div>
                 <div class="input-group mb-3">
-                    <input id="user_id" type="text" class="form-control" placeholder="회원 아이디(글자수 9~12)"
+                    <input autocomplete="off" id="user_id" type="text" class="form-control" placeholder="회원 아이디(글자수 9~12)"
                            aria-label="Recipient's username" aria-describedby="button-addon2">
                     <button class="btn btn-outline-secondary" type="button"
                             id="user_id_duplicate_check">중복확인
@@ -60,7 +62,7 @@
 
                 <div class="m-2">회원 닉네임</div>
                 <div class="input-group mb-3">
-                    <input id="user_nickname" type="text" class="form-control" placeholder="닉네임(글자수 2~10)"
+                    <input autocomplete="off" id="user_nickname" type="text" class="form-control" placeholder="닉네임(글자수 2~10)"
                            aria-label="Recipient's username" aria-describedby="button-addon2">
                     <button class="btn btn-outline-secondary" type="button" id="user_nickname_duplicate_check">중복확인
                     </button>
@@ -81,6 +83,7 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 <script>
+    let id_check = false, nick_check = false;
 
     // 중복체크 버튼 클릭 시 실행 되는 함수
     $('#user_id_duplicate_check').click(function () {
@@ -104,26 +107,43 @@
     //회원 아이디 유효성 검사 함수
     //TO-DO Ajax 이용해서, 아이디 중복 check 아직 미구현
     function user_id_check() {
+
         let user_id = $('#user_id').val()
-
         // 우선 중복 check ajax로 DB 연결해서 안겹치는거 확인한 후 , 그 뒤에 유효성 검사
-
-
-        $('#user_id_message').text("사용가능한 닉네임입니다.")
-        //정규식을 활용해서 특수문자 or 공백 거르는 IF문
-        if (user_id.search(/\W|\s/g) > -1) {
-            validation_false("user_id_message", "사용 불가능한 아이디 입니다.")
-            return false;
-        } else {
-            //사용자 특수문자 길이 확인하는 IF문
-            if (user_id.length >= 6 && user_id.length <= 12) {
-                validation_true("user_id_message", "사용 가능한 아이디 입니다.")
-                return true;
-            } else {
-                validation_false("user_id_message", "사용 불가능한 아이디 입니다.")
-                return false;
+        let formData = new FormData();
+        // 우선 중복 check ajax로 DB 연결해서 닉네임 안겹치는거 확인한 후 , 그 뒤에 유효성 검사
+        formData.append('check_item', "user_id")
+        formData.append('check_value', user_id)
+        $.ajax({
+            type: "POST",
+            url: "/check/duplicate",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                if (response['result'] == 'success') {
+                    //정규식을 활용해서 특수문자 or 공백 거르는 IF문
+                    if (user_id.search(/\W|\s/g) > -1) {
+                        validation_false("user_id_message", "사용 불가능한 아이디 입니다.")
+                        return false;
+                    } else {
+                        //사용자 특수문자 길이 확인하는 IF문
+                        if (user_id.length >= 6 && user_id.length <= 12) {
+                            validation_true("user_id_message", "사용 가능한 아이디 입니다.")
+                            return true;
+                        } else {
+                            validation_false("user_id_message", "사용 불가능한 아이디 입니다.")
+                            return false;
+                        }
+                    }
+                } else {
+                    validation_false("user_id_message", "중복된 아이디 입니다.")
+                    return false;
+                }
             }
-        }
+        })
+
+
     }
 
     //회원 비밀번호 유효성 검사 함수
@@ -156,21 +176,44 @@
     //TO-DO Ajax 이용해서, 아이디 중복 check 아직 미구현
     function user_nickname_check() {
 
-        // 우선 중복 check ajax로 DB 연결해서 닉네임 안겹치는거 확인한 후 , 그 뒤에 유효성 검사
+        const regex = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]+$/;
 
+        let formData = new FormData();
         let user_nickname = $('#user_nickname').val()
-        if (user_nickname.search(/\W|\s/g) > -1) {
-            validation_false("user_nickname_message", "사용 불가능한 닉네임 입니다.")
-            return false;
-        } else {
-            if (user_nickname.length >= 2 && user_nickname.length <= 10) {
-                validation_true("user_nickname_message", "사용 가능한 닉네임 입니다.")
-                return true;
-            } else {
-                validation_false("user_nickname_message", "사용 불가능한 닉네임 입니다.")
-                return false;
+        // 우선 중복 check ajax로 DB 연결해서 닉네임 안겹치는거 확인한 후 , 그 뒤에 유효성 검사
+        formData.append('check_item', "user_nickname")
+        formData.append('check_value', user_nickname)
+        $.ajax({
+            type: "POST",
+            url: "/check/duplicate",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+
+                if (response['result'] == 'success') {
+                    if (regex.test(user_nickname) === false) {
+                        validation_false("user_nickname_message", "사용 불가능한 닉네임 입니다.")
+                        return false;
+                    } else {
+                        if (user_nickname.length >= 2 && user_nickname.length <= 10) {
+                            validation_true("user_nickname_message", "사용 가능한 닉네임 입니다.")
+                            return true;
+                        } else {
+                            validation_false("user_nickname_message", "사용 불가능한 닉네임 입니다.")
+                            return false;
+                        }
+                    }
+                } else {
+                    validation_false("user_nickname_message", "중복된 닉네임 입니다.")
+                    return false;
+
+                }
+
             }
-        }
+        })
+
+
     }
 
 
@@ -179,12 +222,22 @@
         $('#' + id).removeClass('text-danger')
         $('#' + id).addClass('text-primary')
         $('#' + id).text(message)
+        if (id === "user_id_message") {
+            id_check = true
+        } else if (id === "user_nickname_message") {
+            nick_check = true
+        }
     }
 
     function validation_false(id, message) {
         $('#' + id).removeClass('text-primary')
         $('#' + id).addClass('text-danger')
         $('#' + id).text(message)
+        if (id === "user_id_message") {
+            id_check = false
+        } else if (id === "user_nickname_message") {
+            nick_check = false
+        }
 
     }
 
@@ -193,24 +246,56 @@
         if (user_id_check() === false) {
             alert("id를 확인하세요")
             validation_false("user_id_message", "사용 불가능한 아이디 입니다.")
-            return ;
+            return;
         } else if (user_pw_check() === false) {
             alert("pw를 확인하세요")
             validation_false("user_pw_message", "최소 1개의 숫자 혹은 특수 문자를 포함해야 함 길이 (6~20) ")
-            return ;
+            return;
 
         } else if (user_pw_again_check() === false) {
             alert("pw를 확인하세요")
             validation_false("user_pw_check_message", "비밀번호가 다릅니다.")
-            return ;
-        } else if(user_nickname_check() ===false){
+            return;
+        } else if (user_nickname_check() === false) {
             alert("닉네임을 확인하세요")
             validation_false("user_nickname_message", "사용 불가능한 닉네임 입니다.")
             return false;
         }
         // 다 통과했으면 서버로 전송
-        else{
-            alert ("서버 전송")
+        else {
+            setTimeout(() => {
+                if (nick_check === true && id_check === true) {
+                    let formData = new FormData();
+                    let user_id = $('#user_id').val()
+                    let user_pw = $('#user_pw').val()
+                    let user_nickname = $('#user_nickname').val()
+                    // 우선 중복 check ajax로 DB 연결해서 닉네임 안겹치는거 확인한 후 , 그 뒤에 유효성 검사
+                    formData.append('user_pw', user_pw)
+                    formData.append('user_id', user_id)
+                    formData.append('user_nickname', user_nickname)
+                    $.ajax({
+                        type: "POST",
+                        url: "/log/signup/verify",
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        success: function (response) {
+                            if (response['result'] == 'success') {
+                                $.cookie('user_token',response['token'],{path:'/'})
+                                window.location.replace('/')
+                                alert("회원가입 성공")
+                            }
+
+
+                        }
+                    })
+                } else {
+                    alert("회원정보를 다시 확인하세요")
+                }
+
+            }, 1000)
+
+
         }
 
     }
