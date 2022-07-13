@@ -36,6 +36,7 @@ def error_logging_post():
     detail_write = request.form['detail_give']
     solution_write = request.form['solution_give']
 
+
     error_image = request.files.get("error_image")
     solution_image = request.files.get("solution_image")
     # 이미지 넘겨 받고 서버 컴에 저장하는 함수
