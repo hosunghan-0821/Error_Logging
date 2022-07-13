@@ -19,7 +19,7 @@
 
     <script>
         let formData = new FormData()
-
+        let user_nickname = '{{user_info.user_nickname}}'
         function add_image(type, input) {
             console.log(type)
 
@@ -42,6 +42,7 @@
             formData.append("title_give", title)
             formData.append("detail_give", detail)
             formData.append("solution_give", solution)
+            formData.append("user_nickname",user_nickname)
 
             $.ajax({
                 type: 'POST',
@@ -116,6 +117,7 @@
         </div>
     </div>
 </div>
+
 
 </body>
 </html>

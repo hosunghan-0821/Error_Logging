@@ -15,7 +15,7 @@ SECRET_KEY = "error"
 # 로그인 화면 rendering
 @login_page.route('/log/login')
 def login():
-    return render_template('login.html')
+    return render_template('login.html', user_info='None')
 
 
 # 로그인 확인 후 ,jwt 토큰 발급
