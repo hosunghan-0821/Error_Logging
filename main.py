@@ -15,7 +15,8 @@ SECRET_KEY = "error"
 @main_page.route('/')
 def home():
     token_receive = request.cookies.get('user_token')
-    print(token_receive)
+
+    # print(token_receive)
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         print(payload['user_nickname'])
@@ -27,3 +28,4 @@ def home():
     except jwt.exceptions.DecodeError:
         user_info = {'user_nickname': False}
         return render_template('index.html', user_info=user_info)
+

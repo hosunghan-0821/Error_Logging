@@ -25,16 +25,16 @@ def error_logging_post():
     detail_write = request.form['detail_give']
     solution_write = request.form['solution_give']
 
-
-    doc={
-        'title':title,
-        'detail':detail_write,
-        'solution':solution_write,
+    doc = {
+        'title' : title,
+        'detail' : detail_write,
+        'solution' : solution_write,
     }
 
     db.write.insert_one(doc)
 
     return jsonify({'msg': '작성완료!'})
+
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
