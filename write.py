@@ -90,6 +90,10 @@ def save_write_image_in_server(error_image, solution_image, write_num, update):
 
     # 서버에 저장된 이미지에 접근할 수 있는 경로 작성 (ip/port/directory 활용)
     file_route = {}
+    # ec2에서 배포시
+    # server_ip_port = "13.124.195.242"
+
+    # 자신의 로컬 호스트에서 사용시
     server_ip_port = "127.0.0.1:5000"
     route = "/static/Images/"
 
