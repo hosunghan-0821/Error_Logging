@@ -44,20 +44,22 @@
     </div>
 
     <div class="container">
-
         <div class="row">
+            {% for record in records %}
             <div class="mb-2 col-sm-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <h5 class="card-title">{{record.title}}</h5>
+                        <p class="card-text">{{record.detail}}</p>
+                        <div style="display: flex ; flex-direction: row; justify-content: space-between" >
+                            <a href="/log/read?write_num={{record.write_num}}" class="btn btn-primary">상세보기</a>
+                            <div style="padding-top: 12px ">작성일  {{record.date}}</div>
+                        </div>
+
                     </div>
                 </div>
             </div>
-
-
-
+            {% endfor %}
         </div>
 
     </div>
@@ -75,7 +77,6 @@
             <p class="text-center text-muted">© 2022 항해 8기, C반 6조</p>
         </footer>
     </div>
-
 
 </footer>
 <script>

@@ -18,14 +18,37 @@
     </style>
 
     <script>
+        let formData = new FormData()
+
+        function add_image(type, input) {
+            console.log(type)
+
+            if(formData.has(type)){
+                formData.delete(type)
+            }
+
+            formData.append(type, input.files[0])
+            for (let value of formData.values()) {
+                console.log(value);
+            }
+        }
+
         function save_detail() {
+
+
             let title = $('#title').val()
             let detail = $('#detail').val()
             let solution = $(`#solution`).val()
+            formData.append("title_give", title)
+            formData.append("detail_give", detail)
+            formData.append("solution_give", solution)
+
             $.ajax({
                 type: 'POST',
                 url: '/write',
-                data: {title_give: title, detail_give: detail, solution_give: solution},
+                data: formData,
+                contentType: false,
+                processData: false,
                 success: function () {
                     if (title, detail, solution == "") {
                         alert("칸이 비어있습니다")
@@ -34,6 +57,7 @@
                         window.location.replace('/')
 
                     }
+
                 }
             });
         }
@@ -58,10 +82,10 @@
             </div>
         </div>
 
-        <form action="/" method="post" id="upload-form" enctype="multipart/form-data">
-            <label>이미지 첨부</label>
-            <input type="file" name="file" class="form-control-image" placeholder="">
-        </form>
+        <label>이미지 첨부</label>
+        <input style="" onchange="add_image('error_image',this)" accept="image/*" type="file"
+               class="form-control" id="error_image" aria-describedby="inputGroupFileAddon04"
+               aria-label="Upload">
 
         <div class="detail-container" style="padding-top: 50px">
             <h1>😊해결방안</h1>
@@ -75,11 +99,10 @@
                     </div>
                 </div>
 
-                <form action="/" method="post" id="upload-form2" enctype="multipart/form-data">
-                    <label>이미지 첨부</label>
-                    <input type="file" name="file" class="form-control-image" placeholder="">
-                </form>
-
+                <label>이미지 첨부</label>
+                <input style="" onchange="add_image('solution_image',this)" accept="image/*" type="file"
+                       class="form-control" id="solution_image" aria-describedby="inputGroupFileAddon04"
+                       aria-label="Upload">
             </div>
         </div>
 
@@ -90,20 +113,6 @@
                 </button>
             </div>
         </div>
-
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">이름</th>
-                <th scope="col">주소</th>
-                <th scope="col">평수</th>
-            </tr>
-            </thead>
-            <tbody id="order-box">
-
-            </tbody>
-        </table>
-
     </div>
 </div>
 
