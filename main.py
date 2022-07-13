@@ -20,7 +20,7 @@ SECRET_KEY = "error"
 @main_page.route('/')
 def home():
     token_receive = request.cookies.get('user_token')
-    print(token_receive)
+    # print(token_receive)
     all_records = list(db_write.write.find({}, {"_id": False}).sort("write_num", -1))
     print(all_records)
     try:
