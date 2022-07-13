@@ -20,15 +20,32 @@
         <div class="container">
             <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
                 <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-                    <span class="text-primary fs-4">Error_Logging</span>
+                    <div class="waviy">
+                        <span style="--i:1">E</span>
+                        <span style="--i:2">r</span>
+                        <span style="--i:3">r</span>
+                        <span style="--i:4">o</span>
+                        <span style="--i:5">r</span>
+                        <span style="--i:6">_</span>
+                        <span style="--i:7">L</span>
+                        <span style="--i:8">o</span>
+                        <span style="--i:9">g</span>
+                        <span style="--i:10">g</span>
+                        <span style="--i:11">i</span>
+                        <span style="--i:12">n</span>
+                        <span style="--i:13">g</span>
+
+                    </div>
                 </a>
 
                 <ul class="nav nav-pills">
                     <li id="user_nickname_li" class="user_nav nav-item"></li>
-                    <li class="nav-item"><a href="/log/write" class="nav-link"
-                                            aria-current="page">기록하기</a></li>
-                    <li class="nav-item"><a id="login_nav" href="/log/login" class="nav-link"
-                                            aria-current="page">로그인</a></li>
+                    <li class="nav-item">
+                        <a href="/log/write" class="nav-link"aria-current="page">기록하기</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="login_nav" href="/log/login" class="nav-link" aria-current="page">로그인</a>
+                    </li>
 
                 </ul>
 
@@ -46,19 +63,19 @@
     <div class="container">
         <div class="row">
             {% for record in records %}
-            <div class="mb-2 col-sm-6" >
-                <div class="card">
-                    <div style="border-radius: 10px; padding: 20px;">
-                        <h5 class="title" style="text-overflow: ellipsis">{{record.title}}</h5>
-                        <p class="detail" style=" ">{{record.detail}}</p>
-                        <div style="display: flex ; flex-direction: row; justify-content: space-between" >
-                            <a href="/log/read?write_num={{record.write_num}}" class="btn btn-primary">상세보기</a>
-                            <div style="padding-top: 12px ">작성일  {{record.date}}</div>
-                        </div>
+                <div class="mb-2 col-sm-6">
+                    <div class="card">
+                        <div style="border-radius: 10px; padding: 20px;">
+                            <h5 class="title" style="text-overflow: ellipsis">{{ record.title }}</h5>
+                            <p class="detail" style=" ">{{ record.detail }}</p>
+                            <div style="display: flex ; flex-direction: row; justify-content: space-between">
+                                <a href="/log/read?write_num={{ record.write_num }}" class="btn btn-primary">상세보기</a>
+                                <div style="padding-top: 12px ">작성일 {{ record.date }}</div>
+                            </div>
 
+                        </div>
                     </div>
                 </div>
-            </div>
             {% endfor %}
         </div>
 
@@ -70,9 +87,9 @@
     <div class="container-footer">
         <footer class="py-3 my-4">
             <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">김진무</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">은예찬</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">한호성</a></li>
+                <li class="nav-item"><a href="https://github.com/kimjinmoo91" class="nav-link px-2 text-muted">김진무</a></li>
+                <li class="nav-item"><a href="https://github.com/eunyechan" class="nav-link px-2 text-muted">은예찬</a></li>
+                <li class="nav-item"><a href="https://github.com/hosunghan-0821" class="nav-link px-2 text-muted">한호성</a></li>
             </ul>
             <p class="text-center text-muted">© 2022 항해 8기, C반 6조</p>
         </footer>
@@ -108,8 +125,6 @@
         $.removeCookie('user_token', {path: '/'})
         window.location.reload()
     }
-
-
 
 
 </script>
