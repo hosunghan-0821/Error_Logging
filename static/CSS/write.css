@@ -79,6 +79,28 @@ h1 {
         width: 100%;
         left: 0%;
     }
+
+}@keyframes progresimage{
+    0%{
+      width: 0%;
+      left: 50%;
+    }
+    25%{
+        width: 50%;
+        left: 25%;
+    }
+    50%{
+        width: 75%;
+        left: 12.5%;
+    }
+    75%{
+        width: 80%;
+        left: 7.5%;
+    }
+    100%{
+        width: 80%;
+        left: 0%;
+    }
 }
 
 input {
@@ -110,6 +132,22 @@ input {
     border-radius: 10px;
     font-weight: bold;
     padding: 10px;
+}
+
+.form-control-image{
+    width: 80%;
+}
+
+.form-control-image:focus{
+    background-color: transparent;
+    color: black;
+    outline: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 3px solid rgba(13, 110, 253, 0.3);
+    border-radius: 10px;
+    animation: progresimage 1s linear forwards;
 }
 
 .input-detail-container {
