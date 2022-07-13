@@ -69,12 +69,14 @@ def update():
     if error_image is not None:
         to_delete_file_path = prev_error_image.split("/")[-1]
         print(to_delete_file_path)
-        os.remove('./static/Images/' + to_delete_file_path)
+        if to_delete_file_path is not "":
+            os.remove('./static/Images/' + to_delete_file_path)
 
     if solution_image is not None:
         to_delete_file_path = prev_solution_image.split("/")[-1]
         print(to_delete_file_path)
-        os.remove('./static/Images/' + to_delete_file_path)
+        if to_delete_file_path is not "":
+            os.remove('./static/Images/' + to_delete_file_path)
 
     # write.py 에서 쓴 함수 import 해서 이미지 서버에 저장 재활용
     file_route = write.save_write_image_in_server(error_image, solution_image, write_num, True)

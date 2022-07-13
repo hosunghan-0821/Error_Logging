@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="../static/CSS/read.css"/>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
 
     <title>
         error_read_page
@@ -13,12 +16,6 @@
 
 </head>
 
-
-<script>
-    go_back = () => {
-        window.history.back()
-    }
-</script>
 
 <body>
 <h1 style="font-weight: bold; color: black; margin-top: 60px">에러 자세히 Page</h1>
@@ -36,16 +33,13 @@
         <div class="title-image-container">
             <div class="list-container error-title-detail-container">
 
-                {#     에러타이틀       #}
+                {# 에러타이틀 #}
                 <div class="error-title" style="text-align: center">
                     <span>{{ details.title }}</span>
                 </div>
 
-                {#      에러디테일       #}
+                {# 에러디테일 #}
                 <div class="error-detail">
-                    <span>{{ details.detail }}</span>
-                    <span>{{ details.detail }}</span>
-                    <span>{{ details.detail }}</span>
                     <span>{{ details.detail }}</span>
                 </div>
 
@@ -54,9 +48,9 @@
             <div class="image-container">
                 <div class="img">
 
-                    {#       에러이미지       #}
+                    {# 에러이미지 #}
                     <!--                            id="inline"-->
-                    <img style="width: 150px;"src="{{details.error_image }}">
+                    <img style="width: 150px;" src="{{details.error_image }}">
                 </div>
             </div>
         </div>
@@ -71,15 +65,11 @@
             <div class="list-container solution-title-detail-container">
                 <div class="name">
                     <span>{{ details.solution }}</span>
-                    <span>{{ details.solution }}</span>
-                    <span>{{ details.solution }}</span>
-                    <span>{{ details.solution }}</span>
                 </div>
 
             </div>
             <div class="image-container">
                 <div class="img">
-                    <!--                            id="inline"-->
                     <img style="width: 150px;" src="{{  details.solution_image}}">
                 </div>
             </div>
@@ -88,20 +78,61 @@
     <div style="display: flex; align-items: center; justify-content: flex-end; margin-top: 50px;">
         <div class="btn-2-container">
             <div class="btn-2-box">
-                <button style="color: rgba(0,139,139,0.39)" class="btn btn-warning btn-2"><span>수정하기</span>
+                <button id="update_btn" style="display: none;color: rgba(0,139,139,0.39)" class="btn btn-warning btn-2">
+                    <span>수정하기</span>
                 </button>
             </div>
         </div>
 
         <div class="btn-1-container">
             <div class="btn-1-box">
-                <button style="color: rgba(255,0,0,0.39)" class="btn btn-warning btn-1"><span>삭제하기</span>
+                <button  id="delete_btn" style="display: none;color: rgba(255,0,0,0.39)" class="btn btn-warning btn-1">
+                    <span>삭제하기</span>
                 </button>
             </div>
         </div>
     </div>
 
 </div>
+<script>
+    go_back = () => {
+        window.history.back()
+    }
+</script>
+<script>
+    let writer_nickname= '{{details.user_nickname}}'
+    let write_num = '{{details.write_num}}'
+    let user_nickname= '{{user_info.user_nickname}}'
+    console.log('회원닉네임:',user_nickname)
+    console.log('작성자닉네임:',writer_nickname)
+    if(user_nickname===writer_nickname){
+        console.log("아이디 닉 같음")
+        $('#update_btn').css('display','inline')
+        $('#delete_btn').css('display','inline')
+    }
+    $('#update_btn').click(function () {
+        window.location.href = '/log/update?write_num=' + write_num
+    })
+    $('#delete_btn').click(function () {
+        if (confirm("정말로 삭제하시겠습니까?")) {
+            $.ajax({
+                type: 'GET',
+                url: '/log/delete',
+                data: {'write_num': write_num},
+                success: function (response) {
+                    if(response['result']==='success'){
+                        console.log("삭제 성공")
+                        window.location.replace('/')
+                    }
+
+                }
+            });
+        }
+
+    })
+</script>
+
+
 </body>
 
 
