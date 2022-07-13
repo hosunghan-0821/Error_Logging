@@ -21,7 +21,7 @@
 </script>
 
 <body>
-<h1 style="font-weight: bold; color: black; margin-top: 60px">에러 자세히 Page</h1>
+<h1 style="font-weight: bold; color: black; margin-top: 60px">Error 들여다보기</h1>
 <div class="heotal">
     <div class="btn-3-container">
         <div class="btn-3-box">
@@ -44,9 +44,7 @@
                 {#      에러디테일       #}
                 <div class="error-detail">
                     <span>{{ details.detail }}</span>
-                    <span>{{ details.detail }}</span>
-                    <span>{{ details.detail }}</span>
-                    <span>{{ details.detail }}</span>
+
                 </div>
 
             </div>
@@ -56,14 +54,14 @@
 
                     {#       에러이미지       #}
                     <!--                            id="inline"-->
-                    <img style="width: 150px;"src="{{details.error_image }}">
+                    <img style="width: 500px;  height: 300px;" src="{{details.error_image }}">
                 </div>
             </div>
         </div>
     </div>
 
 
-    <div class="">
+    <div class="" style=" border-top: 1px solid rgba(0, 0, 0, 0.6); margin:100px 20px 0px 20px">
         <div class="h1-box">
             <h1>해결방안</h1>
         </div>
@@ -71,21 +69,20 @@
             <div class="list-container solution-title-detail-container">
                 <div class="name">
                     <span>{{ details.solution }}</span>
-                    <span>{{ details.solution }}</span>
-                    <span>{{ details.solution }}</span>
-                    <span>{{ details.solution }}</span>
+
                 </div>
 
             </div>
             <div class="image-container">
                 <div class="img">
                     <!--                            id="inline"-->
-                    <img style="width: 150px;" src="{{  details.solution_image}}">
+                    <img style="width: 500px; height: 300px;" src="{{  details.solution_image}}">
                 </div>
             </div>
         </div>
     </div>
     <div style="display: flex; align-items: center; justify-content: flex-end; margin-top: 50px;">
+        <div style="display: flex">
         <div class="btn-2-container">
             <div class="btn-2-box">
                 <button style="color: rgba(0,139,139,0.39)" class="btn btn-warning btn-2"><span>수정하기</span>
@@ -99,6 +96,7 @@
                 </button>
             </div>
         </div>
+            </div>
     </div>
 
 </div>
