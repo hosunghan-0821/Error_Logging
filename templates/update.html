@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/CSS/write.css">
+
+
+    <title>에러 작성</title>
+
+
+</head>
+<body>
+
+<div class="detail-container">
+    <div class="detail-info">
+        <h1>👿에러사항 수정 </h1>
+
+        <span class="input-group-text">제목</span>
+        <div class="input-group mb-3">
+            <input id="title" type="text" class="form-control" placeholder="제목을 입력해주세요" onfocus="this.placeholder = ''"
+                   onblur="this.placeholder = '제목을 입력해주세요'" value="{{result.title}}">
+
+        </div>
+
+        <div class="input-detail-container">
+            <span class="input-group-text input-group-detail-span">상세설명</span>
+            <div class="input-group input-group-second mb-3">
+                <textarea id="detail" type="text" class="form-control-detail" placeholder="상세하게 입력해주세요"
+                          onfocus="this.placeholder = ''"
+                          onblur="this.placeholder = '상세하게 입력해주세요'">{{result.detail}}</textarea>
+            </div>
+
+        </div>
+
+        <label>이미지 첨부</label>
+        <input style="" onchange="add_image('error_image',this)" accept="image/*" type="file"
+               class="form-control" id="error_image" aria-describedby="inputGroupFileAddon04"
+               aria-label="Upload">
+        <div style="display:flex; flex-direction: column">
+            {% if result.error_image != "" %}
+            <div style="font-size: 15px; padding-top: 15px">* 이미지 첨부시, 기존 이미지는 삭제됩니다.</div>
+            <div style="vertical-align: top;padding-top: 20px ">기존이미지</div>
+            <img style="object-fit: contain; padding:20px " src="{{result.error_image}}" width="150px">
+            {% endif %}
+        </div>
+
+
+        <div class="detail-container" style="padding-top: 50px">
+            <h1>😊해결방안</h1>
+            <div>
+                <div class="input-detail-container" style="padding-top: 70px">
+                    <span class="input-group-text input-group-detail-span">상세설명</span>
+                    <div class="input-group input-group-second mb-3">
+                        <textarea id="solution" type="text" class="form-control-detail"
+                                  placeholder="상세하게 입력해주세요" onfocus="this.placeholder = ''"
+                                  onblur="this.placeholder = '상세하게 입력해주세요'">{{result.solution}}</textarea>
+                    </div>
+                </div>
+
+                <label>이미지 첨부</label>
+                <input style="" onchange="add_image('solution_image',this)" accept="image/*" type="file"
+                       class="form-control" id="solution_image" aria-describedby="inputGroupFileAddon04"
+                       aria-label="Upload">
+                <div style="display:flex; flex-direction: column">
+                    {% if result.solution_image != "" %}
+                    <div style="font-size: 15px; padding-top: 15px">* 이미지 첨부시, 기존 이미지는 삭제됩니다.</div>
+                    <div style="vertical-align: top;padding-top: 20px ">기존이미지</div>
+                    <img style="object-fit: contain; padding:20px " src="{{result.solution_image}}" width="150px">
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="btn-3-container">
+            <div class="btn-3-box">
+                <button onclick="save_detail()" id="submit-btn" class="btn btn-warning btn-3"><span>수정하기</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let formData = new FormData()
+    let user_nickname = '{{user_info.user_nickname}}'
+    let write_num = '{{result.write_num}}'
+
+    function add_image(type, input) {
+        console.log(type)
+
+        if (formData.has(type)) {
+            formData.delete(type)
+        }
+
+        formData.append(type, input.files[0])
+        for (let value of formData.values()) {
+            console.log(value);
+        }
+    }
+
+    function save_detail() {
+
+        let title = $('#title').val()
+        let detail = $('#detail').val()
+        let solution = $(`#solution`).val()
+        formData.append("title_give", title)
+        formData.append("detail_give", detail)
+        formData.append("solution_give", solution)
+        formData.append("user_nickname", user_nickname)
+        formData.append("write_num",write_num)
+
+        $.ajax({
+            type: 'POST',
+            url: '/update',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function () {
+                if (title, detail, solution == "") {
+                    alert("칸이 비어있습니다")
+                    window.location.reload()
+                } else {
+                    window.location.replace('/')
+
+                }
+
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
+

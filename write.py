@@ -57,7 +57,7 @@ def error_logging_post():
     solution_image = request.files.get("solution_image")
     # 이미지 넘겨 받고 서버 컴에 저장하는 함수
 
-    file_route = save_write_image_in_server(error_image, solution_image, write_num)
+    file_route = save_write_image_in_server(error_image, solution_image, write_num,False)
 
     # 서버에 이미지 접속하기 위한 url
     print(file_route)
@@ -83,7 +83,7 @@ def error_logging_post():
     return jsonify({'msg': '작성완료!'})
 
 
-def save_write_image_in_server(error_image, solution_image, write_num):
+def save_write_image_in_server(error_image, solution_image, write_num, update):
     # 현재시간 가져와서 이미지 파일명으로 사용
     now = datetime.now()
     current_time = now.strftime("%Y%m%d_%H%M%S")
