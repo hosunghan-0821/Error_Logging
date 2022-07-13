@@ -53,7 +53,7 @@
 
                     {# 에러이미지 #}
                     <!--                            id="inline"-->
-                    <img style="width: 500px;  height: 300px;" src="{{ details.error_image }}">
+                    <img id="error_image" style="width: 500px;  height: 300px;" src="{{ details.error_image }}">
                 </div>
 
             </div>
@@ -76,7 +76,7 @@
             <div class="image-container">
                 <div class="img">
                     <!--                            id="inline"-->
-                    <img style="width: 500px; height: 300px;" src="{{ details.solution_image }}">
+                    <img id="solution_image" style="width: 500px; height: 300px;" src="{{ details.solution_image }}">
 
                 </div>
             </div>
@@ -114,6 +114,8 @@
     let writer_nickname = '{{details.user_nickname}}'
     let write_num = '{{details.write_num}}'
     let user_nickname = '{{user_info.user_nickname}}'
+    let error_image = '{{details.error_image}}'
+    let solution_image = '{{details.solution_image}}'
     console.log('회원닉네임:', user_nickname)
     console.log('작성자닉네임:', writer_nickname)
     if (user_nickname === writer_nickname) {
@@ -121,6 +123,13 @@
         $('#update_btn').css('display', 'inline')
         $('#delete_btn').css('display', 'inline')
     }
+    if(error_image===""){
+        $('#error_image').css('display','none')
+    }
+    if(solution_image===""){
+        $('#solution_image').css('display','none')
+    }
+
     $('#update_btn').click(function () {
         window.location.href = '/log/update?write_num=' + write_num
     })
