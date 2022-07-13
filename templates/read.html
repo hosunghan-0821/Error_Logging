@@ -1,119 +1,143 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:justify-align="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="../static/CSS/read.css"/>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"></script>
-
-    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
 
-    <title>1주차미니프로젝트_글보기</title>
+    <title>
+        error_read_page
+    </title>
+
+
 </head>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" t></script>
 
 
 <body>
-<style>
-
-    .heotal {
-        border: 2px solid rgba(0, 0, 0, 0.4);
-    }
-
-    h1 {
-        text-align: center;
-        font-weight: bold;
-        color: #0d62fd;
-
-    }
-
-    .h1-box {
-        padding: 20px;
-    }
-
-    .container {
-        boxsizing: border-box;
-        border: 2px solid darkblue;
-
-        max-width: 100%;
-        max-height: 100%;
-
-        flex-direction: column;
-
-    }
-
-    .list-container {
-        margin: auto 0 auto 30px;
-        justify-content: space-evenly;
-        display: flex;
-
-    }
-
-    .input-container {
-        /*box-sizing: border-box;*/
-        width: 70px;
-        height: 60px;
-
-    }
-
-    .name {
-        width: 700px;
-        text-align: center;
-
-    }
-
-    .button {
-        margin-top: 15px;
-        width: 80px;
-
-    }
-
-    .img {
-        justify-content: space-evenly;
-
-    }
-
-</style>
+<h1 style="font-weight: bold; color: black; margin-top: 60px">에러 자세히 Page</h1>
 <div class="heotal">
-    <div class="input-container">
-        <button class="button" id="add-button" onclick="show_order">상세보기</button>
+    <div class="btn-3-container">
+        <div class="btn-3-box">
+            <button onclick="go_back()" id="submit-btn" class="btn btn-warning btn-3"><span>←</span>
+            </button>
+        </div>
+
     </div>
     <div class="container">
         <div class="h1-box">
             <h1 style="color:red";>에러사항</h1>
         </div>
-        <div style="display: flex; align-items: center;" class="list-container">
-            <div id= "error_content" class="name">
+
+        <div class="title-image-container">
+            <div class="list-container error-title-detail-container">
+
+                {# 에러타이틀 #}
+                <div class="error-title" style="text-align: center">
+                    <span>{{ details.title }}</span>
+                </div>
+
+                {# 에러디테일 #}
+                <div class="error-detail">
+                    <span>{{ details.detail }}</span>
+                </div>
+
             </div>
-            <div class="img">
-                <!--                            id="inline"-->
-                <img id= "error_image" src="">
+
+            <div class="image-container">
+                <div class="img">
+
+                    {# 에러이미지 #}
+                    <!--                            id="inline"-->
+                    <img style="width: 150px;" src="{{details.error_image }}">
+                </div>
+
             </div>
         </div>
     </div>
-    <div class="container">
+
+
+    <div class="">
         <div class="h1-box">
             <h1 style="color: blue";>해결방안</h1>
         </div>
-        <div style="display: flex; align-items: center;" class="list-container">
-            <div id="solution_content" class="name">
+
+        <div class="title-image-container">
+            <div class="list-container solution-title-detail-container">
+                <div class="name">
+                    <span>{{ details.solution }}</span>
+                </div>
 
             </div>
-            <div  class="img">
-                <!--                            id="inline"-->
-                <img id= "solution_image" src="">
+            <div class="image-container">
+                <div class="img">
+                    <img style="width: 150px;" src="{{  details.solution_image}}">
+                </div>
             </div>
         </div>
     </div>
+    <div style="display: flex; align-items: center; justify-content: flex-end; margin-top: 50px;">
+        <div class="btn-2-container">
+            <div class="btn-2-box">
+                <button id="update_btn" style="display: none;color: rgba(0,139,139,0.39)" class="btn btn-warning btn-2">
+                    <span>수정하기</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="btn-1-container">
+            <div class="btn-1-box">
+                <button  id="delete_btn" style="display: none;color: rgba(255,0,0,0.39)" class="btn btn-warning btn-1">
+                    <span>삭제하기</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
 </div>
+<script>
+    go_back = () => {
+        window.history.back()
+    }
+</script>
+<script>
+    let writer_nickname= '{{details.user_nickname}}'
+    let write_num = '{{details.write_num}}'
+    let user_nickname= '{{user_info.user_nickname}}'
+    console.log('회원닉네임:',user_nickname)
+    console.log('작성자닉네임:',writer_nickname)
+    if(user_nickname===writer_nickname){
+        console.log("아이디 닉 같음")
+        $('#update_btn').css('display','inline')
+        $('#delete_btn').css('display','inline')
+    }
+    $('#update_btn').click(function () {
+        window.location.href = '/log/update?write_num=' + write_num
+    })
+    $('#delete_btn').click(function () {
+        if (confirm("정말로 삭제하시겠습니까?")) {
+            $.ajax({
+                type: 'GET',
+                url: '/log/delete',
+                data: {'write_num': write_num},
+                success: function (response) {
+                    if(response['result']==='success'){
+                        console.log("삭제 성공")
+                        window.location.replace('/')
+                    }
+
+                }
+            });
+        }
+
+    })
+</script>
+
+
 </body>
+
 </html>

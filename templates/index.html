@@ -44,64 +44,22 @@
     </div>
 
     <div class="container">
-
         <div class="row">
-            <div class="mb-2 col-sm-6">
+            {% for record in records %}
+            <div class="mb-2 col-sm-6" >
                 <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-            <div class="mb-2 col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-            <div class="mb-2 col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-            <div class="mb-2 col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-            <div class="mb-2 col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-            <div class="mb-2 col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
+                    <div style="border-radius: 10px; padding: 20px;">
+                        <h5 class="title" style="text-overflow: ellipsis">{{record.title}}</h5>
+                        <p class="detail" style=" ">{{record.detail}}</p>
+                        <div style="display: flex ; flex-direction: row; justify-content: space-between" >
+                            <a href="/log/read?write_num={{record.write_num}}" class="btn btn-primary">상세보기</a>
+                            <div style="padding-top: 12px ">작성일  {{record.date}}</div>
+                        </div>
 
-
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
         </div>
 
     </div>
@@ -120,9 +78,9 @@
         </footer>
     </div>
 
-
 </footer>
 <script>
+
     let user_nickname = '{{user_info.user_nickname}}'
     $(document).ready(function () {
         login_check()
@@ -144,11 +102,15 @@
         }
     }
 
+
     function logout() {
         console.log("작동")
         $.removeCookie('user_token', {path: '/'})
         window.location.reload()
     }
+
+
+
 
 </script>
 </body>

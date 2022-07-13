@@ -86,5 +86,13 @@
         window.location.href = '/log/signup'
     }
 </script>
+<script>
+    let user_nickname = '{{user_info.user_nickname}}'
+    $(document).ready(function(){
+        if(user_nickname === 'False'){
+            alert('로그인 후 서비스 이용 가능합니다.')
+        }
+    })
+</script>
 </body>
 </html>
