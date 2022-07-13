@@ -226,17 +226,39 @@
     </style>
 
     <script>
+        let formData = new FormData()
+
+        function add_image(type, input) {
+            console.log(type)
+
+            if(formData.has(type)){
+                formData.delete(type)
+            }
+
+            formData.append(type, input.files[0])
+            for (let value of formData.values()) {
+                console.log(value);
+            }
+        }
+
         function save_detail() {
+
+
             let title = $('#title').val()
             let detail = $('#detail').val()
             let solution = $(`#solution`).val()
+            formData.append("title_give", title)
+            formData.append("detail_give", detail)
+            formData.append("solution_give", solution)
+
             $.ajax({
                 type: 'POST',
                 url: '/write',
-                data: {title_give: title, detail_give: detail, solution_give: solution},
+                data: formData,
+                contentType: false,
+                processData: false,
                 success: function () {
-                    $('#submit-btn').submit()
-                    window.location.reload()
+                    window.location.replace('/')
                 }
             });
         }
@@ -259,14 +281,16 @@
             </div>
         </div>
 
-        <form action="/" method="post" id="upload-form" enctype="multipart/form-data">
-            <label>이미지 첨부</label>
-            <input type="file" name="file" class="form-control" placeholder="">
-        </form>
+
+        <label>이미지 첨부</label>
+        <input style="" onchange="add_image('error_image',this)" accept="image/*" type="file"
+               class="form-control" id="error_image" aria-describedby="inputGroupFileAddon04"
+               aria-label="Upload">
+
 
         <div class="detail-container" style="padding-top: 50px">
             <h1>😊해결방안</h1>
-            <div >
+            <div>
                 <div class="input-detail-container" style="padding-top: 70px">
                     <span class="input-group-text input-group-detail-span">상세설명</span>
                     <div class="input-group input-group-second mb-3">
@@ -275,10 +299,10 @@
                     </div>
                 </div>
 
-                <form action="/" method="post" id="upload-form" enctype="multipart/form-data">
-                    <label>이미지 첨부</label>
-                    <input type="file" name="file" class="form-control" placeholder="">
-                </form>
+                <label>이미지 첨부</label>
+                <input style="" onchange="add_image('solution_image',this)" accept="image/*" type="file"
+                       class="form-control" id="solution_image" aria-describedby="inputGroupFileAddon04"
+                       aria-label="Upload">
 
             </div>
         </div>
@@ -286,7 +310,7 @@
 
         <div class="btn-3-container">
             <div class="btn-3-box">
-                <button onclick="save_detail()" id="submit-btn" form="upload-form" class="btn btn-warning btn-3"><span>작성하기</span>
+                <button onclick="save_detail()" id="submit-btn" class="btn btn-warning btn-3"><span>작성하기</span>
                 </button>
             </div>
         </div>
