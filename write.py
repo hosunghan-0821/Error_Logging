@@ -39,6 +39,7 @@ def error_logging_post():
     error_image = request.files.get("error_image")
     solution_image = request.files.get("solution_image")
     # 이미지 넘겨 받고 서버 컴에 저장하는 함수
+
     file_route = save_write_image_in_server(error_image,solution_image, write_num)
 
     # 서버에 이미지 접속하기 위한 url
@@ -80,13 +81,17 @@ def save_write_image_in_server(error_image, solution_image, write_num):
     error_file = str(write_num) + "_" + current_time + "_error" + ".jpg"
     solution_file = str(write_num) + "_" + current_time + "_solution" + ".jpg"
 
+    error_file_path = ""
+    solution_file_path = ""
     # 서버컴에 이미지 저장
-    error_image.save(os.path.join("./static/Images/", secure_filename(error_file)))
-    solution_image.save(os.path.join("./static/Images/", secure_filename(solution_file)))
-
     # error , solution 이미지 경로 저장
-    error_file_path = "http://"+server_ip_port + route + error_file
-    solution_file_path = "http://"+server_ip_port + route + solution_file
+    if error_image is not  None:
+        error_image.save(os.path.join("./static/Images/", secure_filename(error_file)))
+        error_file_path = "http://" + server_ip_port + route + error_file
+    if solution_image is not None:
+        solution_image.save(os.path.join("./static/Images/", secure_filename(solution_file)))
+        solution_file_path = "http://" + server_ip_port + route + solution_file
+
 
     # 파일 경로 dictionary 형태로 저장
     file_route['error_image_path'] = error_file_path
