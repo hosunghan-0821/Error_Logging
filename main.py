@@ -22,7 +22,7 @@ def home():
     token_receive = request.cookies.get('user_token')
     print(token_receive)
     all_records = list(db_write.write.find({}, {"_id": False}).sort("write_num", -1))
-    print(all_records)
+    # print(all_records)
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         print(payload['user_nickname'])

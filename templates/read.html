@@ -3,117 +3,108 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="../static/CSS/read.css"/>
 
 
     <title>
-        1주차미니프로젝트_글보기
+        error_read_page
     </title>
 
 
 </head>
-<body>
-</body>
 
 
 <script>
+    go_back = () => {
+        window.history.back()
+    }
 </script>
 
-
-<style>
-
-    .heotal {
-        border: 2px solid rgba(0, 0, 0, 0.4);
-    }
-
-    h1 {
-        text-align: center;
-        font-weight: bold;
-        color: #0d62fd;
-
-    }
-
-    .h1-box {
-        padding: 20px;
-    }
-
-    .container {
-        boxsizing: border-box;
-        border: 2px solid darkblue;
-
-        max-width: 100%;
-        max-height: 100%;
-
-        flex-direction: column;
-
-    }
-
-    .list-container {
-        margin: auto 0 auto 30px;
-        justify-content: space-evenly;
-        display: flex;
-
-    }
-
-    .input-container {
-        boxsizing: border-box;
-        width: 70px;
-        height: 60px;
-
-    }
-
-    .name {
-        width: 700px;
-        text-align: center;
-
-    }
-
-    .button {
-        margin: 0px 25px 30px 0px;
-        width: 70px;
-
-    }
-
-    .img {
-        justify-content: space-evenly;
-
-    }
-
-    /*칼럼= 수직, 로우=수평*/
-</style>
+<body>
+<h1 style="font-weight: bold; color: black; margin-top: 60px">에러 자세히 Page</h1>
 <div class="heotal">
-    <div class="input-container">
-        <button class="button" id="add-button">상세보기</button>
+    <div class="btn-3-container">
+        <div class="btn-3-box">
+            <button onclick="go_back()" id="submit-btn" class="btn btn-warning btn-3"><span>←</span>
+            </button>
+        </div>
     </div>
     <div class="container">
         <div class="h1-box">
             <h1>에러사항</h1>
         </div>
-        <div style="display: flex; align-items: center;" class="list-container">
-            <div class="name">
+        <div class="title-image-container">
+            <div class="list-container error-title-detail-container">
+
+                {#     에러타이틀       #}
+                <div class="error-title" style="text-align: center">
+                    <span>{{ details.title }}</span>
+                </div>
+
+                {#      에러디테일       #}
+                <div class="error-detail">
+                    <span>{{ details.detail }}</span>
+                    <span>{{ details.detail }}</span>
+                    <span>{{ details.detail }}</span>
+                    <span>{{ details.detail }}</span>
+                </div>
+
             </div>
-            <div class="img">
-                <!--                            id="inline"-->
-                <img src="">
+
+            <div class="image-container">
+                <div class="img">
+
+                    {#       에러이미지       #}
+                    <!--                            id="inline"-->
+                    {#                    <img src="">#}
+                    <span>이미지 들어가는 곳</span>
+                </div>
             </div>
         </div>
     </div>
-    <div class="container">
+
+
+    <div class="">
         <div class="h1-box">
             <h1>해결방안</h1>
         </div>
-        <div style="display: flex; align-items: center;" class="list-container">
-            <div class="name">
+        <div class="title-image-container">
+            <div class="list-container solution-title-detail-container">
+                <div class="name">
+                    <span>{{ details.solution }}</span>
+                    <span>{{ details.solution }}</span>
+                    <span>{{ details.solution }}</span>
+                    <span>{{ details.solution }}</span>
+                </div>
+
             </div>
-            <div class="img">
-                <!--                            id="inline"-->
-                <img src="">
+            <div class="image-container">
+                <div class="img">
+                    <!--                            id="inline"-->
+                    {#                <img src="">#}
+                    <span>이미지 들어가는 곳</span>
+                </div>
             </div>
         </div>
     </div>
+    <div style="display: flex; align-items: center; justify-content: flex-end; margin-top: 50px;">
+        <div class="btn-2-container">
+            <div class="btn-2-box">
+                <button style="color: rgba(0,139,139,0.39)" class="btn btn-warning btn-2"><span>수정하기</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="btn-1-container">
+            <div class="btn-1-box">
+                <button style="color: rgba(255,0,0,0.39)" class="btn btn-warning btn-1"><span>삭제하기</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
 </div>
+</body>
 
-    <!--------------------------------------------------------------------------------------------------------------------------------->
 
-<script src="app.js"></script>
 </html>

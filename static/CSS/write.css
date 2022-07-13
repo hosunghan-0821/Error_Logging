@@ -16,13 +16,12 @@ h1 {
     font-size: 2em;
     text-align: center;
     color: #0d6efd;
-
 }
 
 .detail-container {
     max-width: 700px;
     height: 100%;
-    margin: 60px auto 0px auto;
+    margin: 70px auto 0px auto;
     padding-bottom: 60px;
 }
 

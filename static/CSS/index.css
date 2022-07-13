@@ -48,3 +48,33 @@ main {
     justify-content: center;
     align-items: center;
 }
+
+.title{
+    height: 25px;
+    width: calc(100%);
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 23px;
+    font-weight: bold;
+    color: rgba(13, 110, 253, 0.7);
+}
+
+.detail {
+    height: 25px;
+    width: calc(100%);
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #000;
+    font-weight: bold;
+}
