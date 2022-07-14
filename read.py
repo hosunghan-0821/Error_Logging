@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, jsonify
 from pymongo import MongoClient
+
 import datetime
 import hashlib
 import jwt
@@ -16,9 +17,11 @@ db_write = write.dbsparta
 SECRET_KEY = "error"
 
 
+
 read_page = Blueprint('read_page', __name__, template_folder='templates')
 @read_page.route('/log/read')
 def read():
+
     token_receive = request.cookies.get('user_token')
     write_num = request.args.get('write_num')
     result = db_write.write.find_one({'write_num': int(write_num)}, {'_id': False})
@@ -35,3 +38,4 @@ def read():
     except jwt.exceptions.DecodeError:
         user_info = {'user_nickname': False}
         return render_template('read.html', user_info=user_info, details=result)
+

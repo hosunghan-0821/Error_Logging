@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:justify-align="http://www.w3.org/1999/xhtml">
 <head>
+
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="../static/CSS/read.css"/>
@@ -25,11 +26,13 @@
             <button onclick="go_back()" id="submit-btn" class="btn btn-warning btn-3"><span>←</span>
             </button>
         </div>
+
     </div>
     <div class="container">
         <div class="h1-box">
-            <h1>에러사항</h1>
+            <h1 style="color:red";>에러사항</h1>
         </div>
+
         <div class="title-image-container">
             <div class="list-container error-title-detail-container">
 
@@ -52,6 +55,7 @@
                     <!--                            id="inline"-->
                     <img id="error_image" class="images" src="{{ details.error_image }}">
                 </div>
+
             </div>
         </div>
     </div>
@@ -59,8 +63,9 @@
 
     <div class="" style=" border-top: 1px solid rgba(0, 0, 0, 0.6); margin:100px 20px 0px 20px">
         <div class="h1-box">
-            <h1>해결방안</h1>
+            <h1 style="color: blue";>해결방안</h1>
         </div>
+
         <div class="title-image-container">
             <div class="list-container solution-title-detail-container">
                 <div class="name">
@@ -149,6 +154,5 @@
 
 
 </body>
-
 
 </html>
