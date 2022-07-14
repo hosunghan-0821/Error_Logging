@@ -48,9 +48,13 @@ h1 {
     }
 
     .error-title {
-        font-size: 24px;
-        font-weight: bold;
+
         margin-bottom: 50px;
+    }
+
+    .error-title>span{
+        font-size: 32px;
+        font-weight: bold;
     }
 
     span {
@@ -393,6 +397,9 @@ h1 {
     .list-container{
         width: 100%;
         text-align: center;
+    }
+    .error-title>span{
+        font-size: 26px;
     }
 }
 
